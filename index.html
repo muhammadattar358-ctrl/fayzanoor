@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Portfolio — Fayza Noor Salsabilla (Bella)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet">
+
+<!--
+  ============================================================
+  CARA PAKAI
+  1. Simpan file ini sebagai index.html
+  2. Buat folder "images" di sebelahnya, lalu taruh foto dengan
+     nama file seperti yang tertulis di atribut data-src
+     (contoh: images/profile.jpg). Foto yang belum ada otomatis
+     tampil sebagai placeholder bergaris.
+  3. Mau foto tidak terpotong? biarkan --fit: contain
+     Mau memenuhi bingkai? ganti menjadi --fit: cover
+  4. Video Content Creator & jumlah thumbnail diatur di bagian
+     CONFIG di bagian script paling bawah.
+  ============================================================
+-->
+
+<style>
+:root{
+  --bg:#9d8cbc;
+  --text:#0d0d0d;
+  --highlight:#cbbdff;
+  --accent1:#a855f7;
+  --accent2:#7e22ce;
+  --pill:#e8e8e8;
+  --card:#ffffff;
+  --blue:#2f6df6;
+  --fit:contain;              /* contain = foto utuh | cover = memenuhi bingkai */
+  --sans:"Inter","Helvetica Neue",Arial,sans-serif;
+  --serif:"Instrument Serif",Georgia,serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--text);font-family:var(--sans);overflow-x:hidden}
+img{max-width:100%}
+section{scroll-margin-top:70px}
+.wrap{max-width:1440px;margin:0 auto}
+
+/* ---------- placeholder / foto ---------- */
+.photo{width:100%;height:100%;position:relative;overflow:hidden;
+  display:flex;align-items:center;justify-content:center;text-align:center;padding:6px;
+  font-size:11px;color:rgba(60,30,110,.6);
+  background:repeating-linear-gradient(45deg,#e8e1f7,#e8e1f7 10px,#ddd3f3 10px,#ddd3f3 20px)}
+.photo.has{padding:0;background:rgba(255,255,255,.22)}
+.photo img{width:100%;height:100%;object-fit:var(--fit);display:block}
+.photo.cover img{object-fit:cover}
+.photo.has.zoom{cursor:zoom-in}
+
+/* ---------- reveal saat scroll ---------- */
+.reveal{opacity:0;transform:translateY(30px);transition:opacity .7s cubic-bezier(.22,1,.36,1),transform .7s cubic-bezier(.22,1,.36,1);transition-delay:var(--d,0s)}
+.reveal.in{opacity:1;transform:none}
+
+h2.big{margin:0;font-weight:400;font-size:58px;line-height:.98;letter-spacing:-.03em}
+h2.big em,.hl{font-family:var(--serif);font-style:italic;background:var(--highlight);padding:0 8px}
+.pill{display:inline-block;background:var(--pill);padding:6px 60px;border-radius:999px;font-size:13px;letter-spacing:1px}
+
+/* ---------- NAVBAR ---------- */
+nav{position:sticky;top:0;z-index:50;background:var(--bg);display:flex;align-items:center;justify-content:space-between;
+  padding:12px 36px;gap:20px;animation:navin .6s cubic-bezier(.22,1,.36,1)}
+@keyframes navin{from{transform:translateY(-40px);opacity:0}to{transform:none;opacity:1}}
+.logo{display:flex;align-items:center;gap:10px}
+.logo .av{width:40px;height:40px;border-radius:50%;overflow:hidden;border:2px solid #fff;flex-shrink:0}
+.logo b{display:block;font-size:13px;font-weight:600;line-height:1}
+.logo i{display:inline-block;font-family:var(--serif);font-size:18px;background:var(--highlight);padding:2px 8px;margin-top:2px;line-height:1.1}
+.menu{display:flex;gap:2px;background:#fff;padding:5px;border-radius:999px}
+.menu a{position:relative;padding:6px 14px;border-radius:999px;font-size:14px;color:var(--text);text-decoration:none;white-space:nowrap;transition:transform .2s,background .3s}
+.menu a:hover{transform:scale(1.06)}
+.menu a.active{background:var(--highlight)}
+
+/* ---------- HERO ---------- */
+#home{display:flex;align-items:center;justify-content:center;gap:50px;padding:50px 40px 60px}
+.fcard{position:relative;animation:float 4s ease-in-out infinite;animation-delay:var(--fd,0s);transition:transform .25s}
+.fcard:hover{transform:scale(1.07) rotate(-2deg);z-index:5}
+@keyframes float{0%,100%{translate:0 0}50%{translate:0 -8px}}
+.fcard small{display:block;font-size:9px;opacity:.85;margin-bottom:3px}
+.fcard .frame{border:5px solid #fff;border-radius:4px;overflow:hidden;background:#fff;box-shadow:0 8px 24px rgba(40,20,80,.22)}
+.hero-left{display:flex;flex-direction:column;gap:14px;align-items:flex-start}
+.hero-left .row{display:flex;gap:16px;margin-left:48px}
+.hero-right{display:flex;flex-direction:column;gap:22px;align-items:flex-end}
+.hero-center{text-align:center;max-width:520px}
+.profile{width:150px;height:150px;margin:0 auto 18px;border-radius:50%;overflow:hidden;border:5px solid #fff;
+  box-shadow:0 10px 28px rgba(40,20,80,.3);animation:float 4s ease-in-out infinite;transition:transform .25s}
+.profile:hover{transform:scale(1.08) rotate(-3deg)}
+.hero-center .t{display:table;margin:0 auto;position:relative;font-size:30px;font-weight:500;line-height:1.25;letter-spacing:-.015em;white-space:nowrap}
+.hero-center .t .sel{position:relative;background:rgba(102,190,255,.45);padding:0 .14em;margin:0 .02em}
+.sel::before,.sel::after{content:"";position:absolute;width:11px;pointer-events:none}
+.sel::before{left:-4px;top:-9px;bottom:0;
+  background:radial-gradient(circle at 5.5px 5.5px,#66c0ff 5.4px,transparent 5.9px) top/11px 11px no-repeat,linear-gradient(#66c0ff,#66c0ff) 4px 0/3px 100% no-repeat}
+.sel::after{right:-4px;top:0;bottom:-9px;
+  background:radial-gradient(circle at 5.5px 5.5px,#66c0ff 5.4px,transparent 5.9px) bottom/11px 11px no-repeat,linear-gradient(#66c0ff,#66c0ff) 4px 0/3px 100% no-repeat}
+.cursor{position:absolute;left:100%;margin-left:.3em;top:3.65em;width:1.05em;height:auto;pointer-events:none;z-index:3;animation:float 3s ease-in-out infinite}
+.hero-center .tag{margin-top:18px;font-size:18px;line-height:1.6;color:var(--text)}
+.hero-center .tag u{text-decoration:underline wavy #e53030;text-decoration-thickness:2px;text-underline-offset:4px}
+
+/* ---------- ABOUT ---------- */
+#about{display:flex;align-items:center;justify-content:center;gap:70px;padding:70px 60px}
+.cards{display:flex;flex-wrap:wrap;gap:18px;width:390px;justify-content:center;flex-shrink:0}
+.cards .reveal:nth-child(even){margin-top:28px}
+.acard{width:176px;background:var(--card);border-radius:6px;padding:6px;font-size:10px;text-align:center;
+  box-shadow:0 6px 18px rgba(40,20,80,.2);transition:transform .3s cubic-bezier(.34,1.56,.64,1)}
+.acard:hover{transform:translateY(-8px) rotate(-2deg) scale(1.04)}
+.acard .ph{aspect-ratio:16/10;border-radius:4px;overflow:hidden}
+.acard p{margin:0;padding:6px 2px 2px;line-height:1.3}
+.about-text{width:460px}
+.about-text h2{font-size:52px}
+.about-text p{font-size:15px;line-height:1.45}
+
+/* ---------- WRITING ---------- */
+#writing{padding:60px;text-align:center}
+#writing h2{font-size:52px}
+.scripts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px;max-width:1000px;margin:32px auto}
+.script{display:block;background:var(--card);border-radius:6px;overflow:hidden;color:inherit;text-decoration:none;
+  box-shadow:0 8px 20px rgba(40,20,80,.22);transition:transform .3s cubic-bezier(.34,1.56,.64,1)}
+.script:hover{transform:translateY(-10px) scale(1.03)}
+.script .bar{font-size:10px;padding:6px 10px;text-align:left;background:#eee}
+.script .ph{aspect-ratio:3/4}
+.write-desc{max-width:900px;margin:0 auto;font-size:14px;line-height:1.5}
+
+/* ---------- CONTENT CREATOR ---------- */
+#content{display:flex;align-items:center;justify-content:center;gap:50px;padding:60px 50px 40px;overflow:hidden}
+.c-text{width:340px;flex-shrink:0}
+.c-text p{margin-top:28px;font-size:16px;line-height:1.35}
+.c-mid{display:flex;align-items:center;gap:18px}
+.arrow{width:38px;height:38px;border:0;padding:0;cursor:pointer;flex-shrink:0;transition:transform .2s;
+  background:linear-gradient(135deg,var(--accent1),var(--accent2))}
+.arrow.l{clip-path:polygon(100% 0,0 50%,100% 100%)}
+.arrow.r{clip-path:polygon(0 0,100% 50%,0 100%)}
+.arrow:hover{transform:scale(1.25)}
+.arrow:active{transform:scale(.85)}
+.stage{position:relative;width:320px;height:645px;touch-action:pan-y;user-select:none}
+.podium{position:absolute;left:-8%;right:-8%;bottom:-45px;height:90px}
+.podium .body{position:absolute;inset:22px 0 0 0;background:linear-gradient(90deg,#3b0a7a 0%,var(--accent1) 25%,#e9d5ff 50%,var(--accent2) 75%,#2a0759 100%);border-radius:0 0 50% 50%/0 0 40% 40%}
+.podium .top{position:absolute;left:0;right:0;top:0;height:50px;border-radius:50%;background:radial-gradient(ellipse at 50% 40%,#d8b4fe,var(--accent1) 70%)}
+.scard{position:absolute;top:0;left:0;width:100%;height:600px;border-radius:14px;overflow:hidden;
+  box-shadow:0 20px 40px rgba(30,10,70,.35);cursor:grab;
+  transition:transform .55s cubic-bezier(.22,1,.36,1),opacity .55s}
+.scard.link{cursor:pointer}
+.scard .photo img,.thumb .photo img{object-position:14% 50%}
+.scard video{width:100%;height:100%;object-fit:cover;display:block}
+.scard .views{position:absolute;left:0;right:0;bottom:0;padding:40px 18px 16px;color:#fff;font-size:30px;font-weight:500;
+  background:linear-gradient(transparent,rgba(0,0,0,.45));display:flex;gap:10px;align-items:center}
+.scard .views span{font-size:26px}
+.thumbs{display:grid;grid-template-columns:repeat(2,108px);gap:22px;align-self:flex-start;margin-top:10px;flex-shrink:0}
+.thumb{width:108px;aspect-ratio:9/16;padding:4px;border:0;cursor:pointer;border-radius:10px;
+  background:linear-gradient(135deg,#d8c8ff,var(--accent1));box-shadow:0 4px 10px rgba(40,20,80,.25);
+  animation:pop .35s ease both;transition:transform .25s}
+.thumb:hover{transform:translateY(-6px) scale(1.06)}
+.thumb:active{transform:scale(.95)}
+@keyframes pop{from{opacity:0;transform:scale(.8)}to{opacity:1;transform:none}}
+.thumb .in{position:relative;width:100%;height:100%;border-radius:7px;overflow:hidden}
+.thumb video{width:100%;height:100%;object-fit:cover}
+.thumb .v{position:absolute;left:5px;bottom:4px;font-size:10px;font-weight:600;color:#fff;text-shadow:0 1px 3px rgba(0,0,0,.7)}
+
+/* ---------- VISUAL JOCKEY ---------- */
+#vj{padding:60px 50px;text-align:center}
+.vj-row{display:flex;gap:18px;justify-content:center;align-items:flex-start;max-width:1200px;margin:30px auto 0}
+.vj-thumbs{display:grid;grid-template-columns:repeat(2,118px);gap:10px;flex-shrink:0}
+.vj-thumbs button{width:118px;aspect-ratio:4/5;padding:0;border:3px solid transparent;border-radius:6px;overflow:hidden;cursor:pointer;background:none;transition:transform .2s}
+.vj-thumbs button:hover{transform:scale(1.06)}
+.vj-thumbs button.on{border-color:#fff}
+.vj-main{width:350px;aspect-ratio:3/4;border-radius:8px;overflow:hidden;box-shadow:0 12px 30px rgba(30,10,70,.35);flex-shrink:0;transition:opacity .35s,transform .35s}
+.vj-side{width:420px;aspect-ratio:4/3;border-radius:8px;overflow:hidden;box-shadow:0 12px 30px rgba(30,10,70,.3);flex-shrink:0;transition:opacity .4s,transform .4s}
+.swap{opacity:0;transform:scale(1.04)}
+.vj-cap{max-width:900px;margin:28px auto 0;text-align:left}
+.vj-cap b{display:inline-block;background:var(--highlight);font-size:15px;padding:2px 8px;margin-bottom:6px}
+.vj-cap p{margin:0;font-size:14px;line-height:1.5}
+
+/* ---------- DESIGN ---------- */
+#design{padding:60px 50px;text-align:center}
+.d-grid{--g:40px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--g);max-width:1200px;margin:50px auto 0}
+.d-item{position:relative;height:380px;display:flex;gap:20px;transition:transform .3s cubic-bezier(.34,1.56,.64,1)}
+.d-item:hover{transform:translateY(-8px) scale(1.02)}
+.d-center{grid-column:1/-1;justify-self:center;width:calc((100% - 2*var(--g))/3*2 + var(--g))}
+.d-item.s2{grid-column:span 2}
+.d-item .lbl{position:absolute;top:-16px;left:10px;z-index:2;background:var(--blue);color:#fff;font-size:13px;padding:5px 14px;border-radius:8px;text-align:left;max-width:88%}
+.d-item .box{flex:1;min-width:0;height:100%;border-radius:10px;overflow:hidden;box-shadow:0 10px 24px rgba(40,20,80,.28)}
+
+/* ---------- PHOTOGRAPHY ---------- */
+#photography{padding:60px 50px;text-align:center}
+.p-grid{display:flex;flex-wrap:wrap;justify-content:center;gap:18px;max-width:1200px;margin:32px auto 0}
+.p-grid>.reveal{width:calc(25% - 14px)}
+.p-item{text-align:left;transition:transform .3s cubic-bezier(.34,1.56,.64,1)}
+.p-item:hover{transform:translateY(-4px) scale(1.04)}
+.p-item small{display:block;font-size:10px;margin-bottom:3px;opacity:.85}
+.p-item .ph{aspect-ratio:4/3;border-radius:4px;overflow:hidden;box-shadow:0 6px 16px rgba(40,20,80,.22)}
+
+/* ---------- CONTACT (kolase) ---------- */
+#contact{padding:50px 30px 70px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.collage{position:relative;container-type:inline-size;width:100%;max-width:1440px;margin:0 auto;aspect-ratio:1882/1010}
+.collage>*{position:absolute;left:var(--l);top:var(--t)}
+.cphoto,.cnotes,.win{width:var(--w)}
+.cphoto{z-index:1;display:block;height:auto;filter:drop-shadow(0 14px 26px rgba(40,20,80,.3))}
+.cnotes{z-index:3;filter:drop-shadow(0 10px 22px rgba(40,20,80,.28))}
+.cnotes img{display:block;width:100%;height:auto}
+.cnotes .hot{position:absolute;left:var(--x,8.4%);top:var(--y);width:var(--w2);height:var(--h);border-radius:.6cqw;transition:background .2s}
+.cnotes .hot:hover,.cnotes .hot:focus-visible{background:rgba(232,169,43,.22);outline:none}
+.win{z-index:2;display:block;background:#fff;border-radius:.75cqw;overflow:hidden;box-shadow:0 10px 26px rgba(40,20,80,.28);
+  transition:translate .3s cubic-bezier(.34,1.56,.64,1)}
+.win:hover{translate:0 -6px}
+.win.top{z-index:4}
+.win .bar{position:relative;background:#ebebeb;padding-top:9.6%}
+.win .bar i{position:absolute;top:50%;width:2.6%;aspect-ratio:1;border-radius:50%;transform:translateY(-50%)}
+.win .bar i:nth-child(1){left:4.2%;background:#ff1f1f}
+.win .bar i:nth-child(2){left:8.3%;background:#ff9d00}
+.win .bar i:nth-child(3){left:12.1%;background:#10c010}
+.win img{display:block;width:100%;height:auto}
+.ic{z-index:5;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:1.1cqw;
+  color:#f6f0ff;text-decoration:none;animation:float 3.6s ease-in-out infinite;animation-delay:var(--fd,0s);
+  transition:scale .25s}
+.ic:hover{scale:1.12}
+.ic .tile{width:calc(var(--s)*1cqw);aspect-ratio:1;display:grid;place-items:center}
+.ic .tile img{display:block;width:100%;height:100%;object-fit:contain}
+.ic .tile.rd{border-radius:22%;overflow:hidden}
+.ic .tile.rd img{object-fit:cover}
+.ic .tile.wh{background:#fff;border-radius:22%}
+.ic .tile.wh img{width:70%;height:auto}
+.ic .lb{font-size:1.5cqw;font-weight:600;letter-spacing:.06em;line-height:1;white-space:nowrap;text-shadow:0 2px 8px rgba(40,20,80,.25)}
+
+/* ---------- LIGHTBOX ---------- */
+#lb{position:fixed;inset:0;z-index:9999;background:rgba(20,10,40,.88);display:none;align-items:center;justify-content:center;cursor:zoom-out}
+#lb.on{display:flex;animation:fade .25s}
+#lb img{max-width:90vw;max-height:90vh;border-radius:8px}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+
+/* menu bisa digeser ke samping, scrollbar disembunyikan */
+.menu{overflow-x:auto;scrollbar-width:none;max-width:100%}
+.menu::-webkit-scrollbar{display:none}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
+/* ---------- laptop kecil / tablet landscape ---------- */
+@media (max-width:1250px){
+  #home,#about,#content,#contact{flex-wrap:wrap}
+  nav{flex-wrap:wrap}
+  .vj-row{flex-wrap:wrap}
+}
+
+/* ---------- tablet portrait ---------- */
+@media (max-width:900px){
+  section{padding-left:24px !important;padding-right:24px !important}
+  h2.big{font-size:46px}
+  .about-text,.c-text{width:100%;max-width:560px}
+  .cards{width:100%;max-width:420px}
+  .scripts{gap:16px}
+  .d-grid{--g:34px}
+  .d-item{height:300px}
+  .p-grid>.reveal{width:calc(33.33% - 12px)}
+}
+
+/* ---------- HP ---------- */
+@media (max-width:760px){
+  body{font-size:15px}
+  section{padding-top:44px !important;padding-bottom:44px !important;padding-left:18px !important;padding-right:18px !important;scroll-margin-top:60px}
+  h2.big,.about-text h2,#writing h2,.c-info h2{font-size:38px}
+  .pill{padding:6px 40px}
+
+  /* navbar: logo di atas, menu bisa digeser */
+  nav{padding:10px 14px;gap:8px}
+  .menu{width:100%;order:2}
+  .menu a{padding:6px 12px;font-size:13px}
+
+  /* hero */
+  #home{flex-direction:column;gap:26px;padding-top:28px !important}
+  .hero-center{order:-1;max-width:100%}
+  .hero-center .t{font-size:22px;display:block;white-space:normal}
+  .hero-center .t br{display:none}
+  .cursor{display:none}
+  .sel::before,.sel::after{display:none}
+  .hero-center .t .sel{-webkit-box-decoration-break:clone;box-decoration-break:clone}
+  .hero-center .tag{font-size:15px}
+  .hero-center .tag br{display:none}
+  .profile{width:120px;height:120px}
+  .hero-left,.hero-right{flex-direction:row;flex-wrap:wrap;justify-content:center;align-items:flex-start;width:100%;gap:14px}
+  .hero-left .row{margin-left:0;width:100%;justify-content:center}
+  .hero-left>.fcard:first-child{width:86% !important}
+  .hero-left .row .fcard{width:38% !important}
+  .hero-right .fcard{width:46% !important}
+
+  /* about */
+  #about{flex-direction:column;gap:34px}
+  .cards{gap:12px}
+  .acard{width:calc(50% - 6px)}
+  .cards .reveal{width:calc(50% - 6px)}
+  .cards .reveal .acard{width:100%}
+  .about-text p{font-size:14.5px}
+
+  /* writing */
+  .scripts{grid-template-columns:1fr;max-width:300px}
+  .write-desc{font-size:13.5px}
+
+  /* content creator */
+  #content{flex-direction:column;gap:34px;padding-bottom:30px !important}
+  .c-text p{font-size:15px;margin-top:18px}
+  .c-mid{--sw:min(66vw,290px);gap:8px}
+  .arrow{width:30px;height:30px}
+  .stage{width:var(--sw);height:calc(var(--sw) * 1.875 + 45px)}
+  .scard{height:calc(var(--sw) * 1.875)}
+  .scard .views{font-size:24px}
+  .thumbs{grid-template-columns:repeat(3,1fr);gap:12px;width:100%;max-width:340px;align-self:center;margin-top:34px}
+  .thumb{width:100%}
+
+  /* visual jockey */
+  .vj-row{flex-direction:column;align-items:center;gap:16px}
+  .vj-main{order:1;width:100%;max-width:360px}
+  .vj-thumbs{order:2;grid-template-columns:repeat(3,1fr);width:100%;max-width:360px}
+  .vj-thumbs button{width:100%}
+  .vj-side{order:3;width:100%;max-width:420px}
+  .vj-cap b{font-size:14px}
+  .vj-cap p{font-size:13.5px}
+
+  /* design */
+  .d-grid{grid-template-columns:1fr;gap:42px;margin-top:40px}
+  .d-grid>.reveal{grid-column:auto !important}
+  .d-center{width:100%}
+  .d-item{height:260px;gap:12px}
+  .d-item .lbl{font-size:12px}
+
+  /* photography */
+  .p-grid{gap:12px}
+  .p-grid>.reveal{width:calc(50% - 6px)}
+
+  /* contact: kolase jadi susunan vertikal */
+  #contact{padding-left:14px !important;padding-right:14px !important}
+  .collage{aspect-ratio:auto;container-type:normal;display:flex;flex-wrap:wrap;justify-content:center;align-items:flex-start;gap:22px 8px}
+  .collage>*{position:static}
+  .cphoto{order:1;width:min(72vw,300px)}
+  .cnotes{order:2;width:100%;max-width:380px}
+  .ic{order:3;transform:none;width:calc(25% - 8px);gap:8px}
+  .ic .tile{width:min(62px,16vw)}
+  .ic .lb{font-size:12px}
+  .win{order:4;width:100%;max-width:420px;border-radius:10px}
+}
+
+/* ---------- HP kecil ---------- */
+@media (max-width:380px){
+  h2.big,.about-text h2,#writing h2,.c-info h2{font-size:33px}
+  .acard{font-size:9px}
+}
+
+/* kurangi animasi bagi yang memintanya */
+@media (prefers-reduced-motion:reduce){
+  *{animation:none !important;transition:none !important}
+  .reveal{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+
+<!-- ===================== NAVBAR ===================== -->
+<nav>
+  <div class="logo">
+    <div class="av"><div class="photo cover" data-src="images/profile.jpg" data-label=""></div></div>
+    <div><b>portfolio</b><i>bella</i></div>
+  </div>
+  <div class="menu" id="menu">
+    <a href="#home">home</a>
+    <a href="#about">about me</a>
+    <a href="#writing">writing</a>
+    <a href="#content">content</a>
+    <a href="#vj">vj</a>
+    <a href="#design">design</a>
+    <a href="#photography">photography</a>
+  </div>
+</nav>
+
+<div class="wrap">
+
+<!-- ===================== HERO ===================== -->
+<section id="home">
+  <div class="hero-left">
+    <div class="fcard" style="width:257px;--fd:0s"><small>HACK UP.png</small><div class="frame" style="aspect-ratio:4/3"><div class="photo zoom" data-src="images/hack-up.png" data-label="HACK UP.png"></div></div></div>
+    <div class="row">
+      <div class="fcard" style="width:118px;--fd:.6s"><small>pletek.jpg</small><div class="frame" style="aspect-ratio:1/1"><div class="photo zoom" data-src="images/pletek.jpg" data-label="pletek.jpg"></div></div></div>
+      <div class="fcard" style="width:118px;--fd:1.2s"><small>pubkre.jpg</small><div class="frame" style="aspect-ratio:1/1"><div class="photo zoom" data-src="images/pubkre.jpg" data-label="pubkre.jpg"></div></div></div>
+    </div>
+  </div>
+
+  <div class="hero-center">
+    <div class="profile"><div class="photo cover zoom" data-src="images/profile.jpg" data-label="foto profil"></div></div>
+    <div class="t">hello! I’m Fayza Noor Salsabilla <br>known as “Bella”, <span class="sel">a writer at heart</span> <br>and a creative by nature.<img class="cursor" src="images/cursor.png" alt="" onerror="this.remove()"></div>
+    <div class="tag"><u>Turning ideas into stories</u> through scriptwriting, <br>digital content, and visual storytelling.</div>
+  </div>
+
+  <div class="hero-right">
+    <div class="fcard" style="width:218px;--fd:.9s"><small>lomba.png</small><div class="frame" style="aspect-ratio:4/3"><div class="photo zoom" data-src="images/lomba.png" data-label="lomba.png"></div></div></div>
+    <div class="fcard" style="width:257px;--fd:1.5s"><small>FOH MPKMB IPB 63.png</small><div class="frame" style="aspect-ratio:4/3"><div class="photo zoom" data-src="images/foh-mpkmb-ipb-63.png" data-label="FOH MPKMB IPB 63.png"></div></div></div>
+  </div>
+</section>
+
+<!-- ===================== ABOUT ===================== -->
+<section id="about">
+  <div class="cards">
+    <div class="reveal" style="--d:0s"><div class="acard"><div class="ph"><div class="photo zoom" data-src="images/about-1.jpg" data-label="foto"></div></div><p>Scriptwriting internship at PT PLN Indonesia Power (2023)</p></div></div>
+    <div class="reveal" style="--d:.08s"><div class="acard"><div class="ph"><div class="photo zoom" data-src="images/about-2.jpg" data-label="foto"></div></div><p>Content Creator Intern at Buatinkamu.id (2024)</p></div></div>
+    <div class="reveal" style="--d:.16s"><div class="acard"><div class="ph"><div class="photo zoom" data-src="images/about-3.jpg" data-label="foto"></div></div><p>Staff of Communication and Information at BEM Sekolah Vokasi IPB (2024-2025)</p></div></div>
+    <div class="reveal" style="--d:.24s"><div class="acard"><div class="ph"><div class="photo zoom" data-src="images/about-4.jpg" data-label="foto"></div></div><p>Creative Staff and Visual Jockey at MPKMB IPB 63 x AGSN 2026</p></div></div>
+    <div class="reveal" style="--d:.32s"><div class="acard"><div class="ph"><div class="photo zoom" data-src="images/about-5.jpg" data-label="foto"></div></div><p>Freelance at Biru Media (2025-Present)</p></div></div>
+    <div class="reveal" style="--d:.4s"><div class="acard"><div class="ph"><div class="photo zoom" data-src="images/about-6.jpg" data-label="foto"></div></div><p>Second Place Winner of the National Creative Video Competition by HIMIKASI UPI (2026)</p></div></div>
+  </div>
+  <div class="about-text reveal">
+    <h2 class="big">about <em>me</em></h2>
+    <p style="margin-top:22px">I'm a Digital Communication and Media student at IPB University with a background in Multimedia. What began as a childhood hobby in writing and storytelling has evolved into a passion I explore across different creative fields.</p>
+    <p>Through hands-on projects, team collaborations, organizations, and events, I've developed adaptability and a continuous drive to learn. I believe creativity isn't bound to one medium, it's about communicating ideas, telling stories, and creating meaningful work.</p>
+  </div>
+</section>
+
+<!-- ===================== WRITING ===================== -->
+<section id="writing">
+  <h2 class="big reveal">writing</h2>
+  <div class="scripts">
+        <div class="reveal" style="--d:0s"><a class="script" href="https://drive.google.com/file/d/1aauvsIdGRYwo3_RRcrL6Jdzw1s9E99Dr/view" target="_blank" rel="noopener"><div class="bar">Ujian Short Film.pdf</div><div class="ph"><div class="photo" data-src="images/ujian.png" data-label="preview naskah"></div></div></a></div>
+    <div class="reveal" style="--d:.12s"><a class="script" href="https://drive.google.com/file/d/13z8YvLVOIaZaAvHS3HvvttMTBIxpO-_p/view" target="_blank" rel="noopener"><div class="bar">Berhenti Sejenak Short Film.pdf</div><div class="ph"><div class="photo" data-src="images/berhenti-sejenak.png" data-label="preview naskah"></div></div></a></div>
+    <div class="reveal" style="--d:.24s"><a class="script" href="https://drive.google.com/file/d/1t8sMl5VDoYUb4N8xpoTHIN3SBaN1_W6Y/view?usp=sharing" target="_blank" rel="noopener"><div class="bar">Yaudah Sih Creative Video Competition.pdf</div><div class="ph"><div class="photo" data-src="images/yaudah-sih.png" data-label="preview naskah"></div></div></a></div>
+  </div>
+  <p class="write-desc reveal">Writing has always been my favorite way to explore ideas and bring stories to life. From copywriting, content writing, and short stories to film scripts, storyboards, and shot lists, I love experimenting with different formats. The three scripts offer a glimpse into that range. Whether it’s an everyday story or a promotional piece, I enjoy adapting my style to find the right words for every idea, because there’s always another story waiting to be written.</p>
+</section>
+
+<!-- ===================== CONTENT CREATOR ===================== -->
+<section id="content">
+  <div class="c-text reveal">
+    <h2 class="big">content<br><em>creator</em></h2>
+    <p>I enjoy bringing ideas to life through relatable content, handling everything from concepts and scripts to on-camera appearances and editing. My background spans producing social media content, live reports, and recaps for MPKMB IPB 63 x AGSN 2026, interning at Buatinkamu.id, freelancing for Biru Media, as well as personal and university projects.</p>
+  </div>
+  <div class="c-mid" id="cmid">
+    <button class="arrow l" id="prev" aria-label="Sebelumnya"></button>
+    <div class="stage" id="stage"><div class="podium"><div class="body"></div><div class="top"></div></div></div>
+    <button class="arrow r" id="next" aria-label="Berikutnya"></button>
+  </div>
+  <div class="thumbs" id="thumbs"></div>
+</section>
+
+<!-- ===================== VISUAL JOCKEY ===================== -->
+<section id="vj">
+  <div class="reveal"><span class="pill">VISUAL JOCKEY</span></div>
+  <div class="vj-row">
+    <div class="vj-thumbs" id="vjThumbs"></div>
+    <div class="vj-main" id="vjMain"></div>
+    <div class="vj-side" id="vjSide"></div>
+  </div>
+  <div class="vj-cap reveal">
+    <b>Behind the Screen, Bringing the Event to Life</b>
+    <p>Stepping into the role of a Visual Jockey for MPKMB IPB 63 x AGSN 2026 was an unexpected yet rewarding challenge. As part of the technical production team, I operated the main videotron and managed live visual playback via vMix, from initial rehearsals at Sympora through both event days of MPKMB IPB 63 and AGSN 2026. Mastering technical cues, timing, and coordination under pressure was nerve-racking at first, proving that the best experiences often come from opportunities you never saw coming.</p>
+  </div>
+</section>
+
+<!-- ===================== DESIGN ===================== -->
+<section id="design">
+  <div class="reveal"><span class="pill">DESIGN</span></div>
+  <div class="d-grid">
+    <div class="reveal" style="grid-column:span 2;--d:0s"><div class="d-item"><div class="lbl">Feeds - Adobe Photoshop</div>
+      <div class="box"><div class="photo zoom" data-src="images/feeds-1.jpg" data-label="hasil desain"></div></div>
+      <div class="box"><div class="photo zoom" data-src="images/feeds-2.jpg" data-label="hasil desain ke-2"></div></div></div></div>
+    <div class="reveal" style="--d:.3s"><div class="d-item"><div class="lbl">UI/UX - Figma</div>
+      <div class="box"><div class="photo zoom" data-src="images/uiux.jpg" data-label="hasil desain"></div></div></div></div>
+    <div class="reveal d-center" style="--d:.2s"><div class="d-item"><div class="lbl">Logo - Corel Draw</div>
+      <div class="box"><div class="photo zoom" data-src="images/logo-1.jpg" data-label="hasil desain"></div></div>
+      <div class="box"><div class="photo zoom" data-src="images/logo-2.jpg" data-label="hasil desain ke-2"></div></div></div></div>
+  </div>
+</section>
+
+<!-- ===================== PHOTOGRAPHY ===================== -->
+<section id="photography">
+  <div class="reveal"><span class="pill">PHOTOGRAPHY</span></div>
+  <div class="p-grid" id="pGrid"></div>
+</section>
+
+<!-- ===================== CONTACT ===================== -->
+<section id="contact">
+  <h2 class="sr">contact me!</h2>
+  <div class="collage reveal">
+    <img class="cphoto" src="images/contact-photo.png" alt="Fayza Noor Salsabilla (Bella)" style="--l:3.5%;--t:6.4%;--w:30.2%">
+
+    <a class="win" href="https://instagram.com/fyxswg" target="_blank" rel="noopener" style="--l:57.3%;--t:5.1%;--w:26.1%"><div class="bar"><i></i><i></i><i></i></div><img src="images/shot-instagram.jpg" alt="Instagram @fyxswg"></a>
+    <a class="win top" href="https://www.linkedin.com/in/fayzanoor-salsabilla/" target="_blank" rel="noopener" style="--l:45.8%;--t:47.7%;--w:17.1%"><div class="bar"><i></i><i></i><i></i></div><img src="images/shot-linkedin.jpg" alt="LinkedIn Fayza Noor Salsabilla"></a>
+    <a class="win top" href="https://bit.ly/Portofolio-Fayza-Notion" target="_blank" rel="noopener" style="--l:71.6%;--t:36.6%;--w:22.1%"><div class="bar"><i></i><i></i><i></i></div><img src="images/shot-notion.jpg" alt="Notion Portofolio Fayza"></a>
+
+    <div class="cnotes" style="--l:19%;--t:66.5%;--w:24%">
+      <img src="images/contact-notes.png" alt="Contact me! WhatsApp: +62 813 1740 7991, Gmail: fayzansnzm@gmail.com, Instagram: @fyxswg, LinkedIn: linkedin.com/in/fayzanoor-salsabilla, Notion: bit.ly/Portofolio-Fayza-Notion">
+      <a class="hot" href="https://wa.me/6281317407991" target="_blank" rel="noopener" title="WhatsApp" aria-label="WhatsApp" style="--y:40.3%;--h:7.9%;--w2:59.5%"></a>
+      <a class="hot" href="mailto:fayzansnzm@gmail.com" title="Gmail" aria-label="Gmail" style="--y:48.2%;--h:8%;--w2:60%"></a>
+      <a class="hot" href="https://instagram.com/fyxswg" target="_blank" rel="noopener" title="Instagram" aria-label="Instagram" style="--y:56.2%;--h:7.9%;--w2:38.5%"></a>
+      <a class="hot" href="https://www.linkedin.com/in/fayzanoor-salsabilla/" target="_blank" rel="noopener" title="LinkedIn" aria-label="LinkedIn" style="--y:64.1%;--h:15.9%;--w2:82%"></a>
+      <a class="hot" href="https://bit.ly/Portofolio-Fayza-Notion" target="_blank" rel="noopener" title="Notion" aria-label="Notion" style="--y:80%;--h:7.4%;--w2:81.5%"></a>
+    </div>
+
+    <a class="ic" href="https://instagram.com/fyxswg" target="_blank" rel="noopener" style="--l:50.7%;--t:5.1%;--s:6.2;--fd:0s"><span class="tile"><img src="images/icon-instagram.png" alt=""></span><span class="lb">Instagram</span></a>
+    <a class="ic" href="https://www.canva.com" target="_blank" rel="noopener" style="--l:43%;--t:26.7%;--s:6.2;--fd:.3s"><span class="tile rd"><img src="images/icon-canva.png" alt=""></span><span class="lb">Canva</span></a>
+    <a class="ic" href="https://bit.ly/Portofolio-Fayza-Notion" target="_blank" rel="noopener" style="--l:91%;--t:15.6%;--s:5.8;--fd:.6s"><span class="tile"><img src="images/icon-notion.png" alt=""></span><span class="lb">Notion</span></a>
+    <a class="ic" href="https://wa.me/6281317407991" target="_blank" rel="noopener" style="--l:8%;--t:80.5%;--s:6.2;--fd:.9s"><span class="tile"><img src="images/icon-whatsapp.png" alt=""></span><span class="lb">WhatsApp</span></a>
+    <a class="ic" href="https://www.linkedin.com/in/fayzanoor-salsabilla/" target="_blank" rel="noopener" style="--l:50.7%;--t:77.7%;--s:6.2;--fd:1.2s"><span class="tile"><img src="images/icon-linkedin.png" alt=""></span><span class="lb">LinkedIn</span></a>
+    <a class="ic" href="https://www.figma.com" target="_blank" rel="noopener" style="--l:65.9%;--t:77.8%;--s:6.2;--fd:1.5s"><span class="tile rd"><img src="images/icon-figma.png" alt=""></span><span class="lb">Figma</span></a>
+    <a class="ic" href="https://www.capcut.com" target="_blank" rel="noopener" style="--l:78.4%;--t:75.7%;--s:6.2;--fd:1.8s"><span class="tile rd"><img src="images/icon-capcut.png" alt=""></span><span class="lb">Capcut</span></a>
+    <a class="ic" href="mailto:fayzansnzm@gmail.com" style="--l:90.9%;--t:80.5%;--s:6.2;--fd:2.1s"><span class="tile wh"><img src="images/icon-gmail.png" alt=""></span><span class="lb">Gmail</span></a>
+  </div>
+</section>
+
+</div>
+
+<div id="lb"><img alt=""></div>
+
+<script>
+/* ============================================================
+   CONFIG — ubah di sini
+   ============================================================ */
+const CONFIG = {
+  // Content Creator: video = path file mp4 (boleh kosong), thumb = gambar sampul
+  videos: [
+    { video: "", thumb: "images/thumb-1.jpg", views: "896.1K", url: "https://vt.tiktok.com/ZSpsU7gDx/" },            // transisi
+    { video: "", thumb: "images/thumb-2.jpg", views: "94.1K",  url: "https://vt.tiktok.com/ZSpsXfRue/" },            // pov beda jalur
+    { video: "", thumb: "images/thumb-3.jpg", views: "46.2K",  url: "https://www.instagram.com/reel/DXEtnz5jVkM/?gwpx=MTJ5c3ZzNGRrOGZ6Mg==" }, // dracin
+    { video: "", thumb: "images/thumb-4.jpg", views: "38.7K",  url: "https://vt.tiktok.com/ZSpsUHLPC/" },            // tertular
+    { video: "", thumb: "images/thumb-5.jpg", views: "22.8K",  url: "https://www.instagram.com/reel/DY4cyhRNGKa/?knvt=MXFzdXBqamswYm1hYQ==" }, // janlup daful
+    { video: "", thumb: "images/thumb-6.jpg", views: "246.1K", url: "https://vt.tiktok.com/ZSpsUSBD1/" },            // MK lolos daful
+    { video: "", thumb: "images/thumb-7.jpg", views: "10.7K",  url: "" }                                            // (link belum ada)
+  ],
+  showViews: false,      // angka views sudah ada di dalam gambar thumbnail
+  autoplay: true,        // geser otomatis
+  interval: 4000,        // ms
+  // Visual Jockey: tambah / kurangi foto di sini
+  vj: ["images/vj-1.jpg","images/vj-2.jpg","images/vj-3.jpg","images/vj-4.jpg","images/vj-5.jpg","images/vj-6.jpg"],
+  // Photography: caption + file
+  photos: [
+    ["biru baru.jpg","images/biru-baru-1.jpg"],
+    ["biru baru.jpg","images/biru-baru-2.jpg"]
+  ]
+};
+
+/* ---------- helper foto: tampilkan placeholder, ganti saat file ada ---------- */
+function fill(el){
+  const src = el.dataset.src, label = el.dataset.label || "";
+  if (!el.firstChild) el.textContent = label || "isi foto";
+  if (!src) return;
+  const im = new Image();
+  im.onload = () => { el.textContent = ""; el.appendChild(im); el.classList.add("has"); };
+  im.alt = label;
+  im.src = src;
+}
+function mk(src,label,cls){
+  const d = document.createElement("div");
+  d.className = "photo " + (cls||"");
+  d.dataset.src = src||""; d.dataset.label = label||"";
+  fill(d); return d;
+}
+
+/* ---------- Photography & VJ dibangun dari CONFIG ---------- */
+const pGrid = document.getElementById("pGrid");
+CONFIG.photos.forEach(([cap,src],i)=>{
+  const w = document.createElement("div");
+  w.className = "reveal"; w.style.setProperty("--d",(i%4)*0.08+"s");
+  w.innerHTML = '<div class="p-item"><small></small><div class="ph"></div></div>';
+  w.querySelector("small").textContent = cap;
+  w.querySelector(".ph").appendChild(mk(src,cap,"zoom"));
+  pGrid.appendChild(w);
+});
+
+let vi = 0;
+const vjThumbs = document.getElementById("vjThumbs"),
+      vjMain = document.getElementById("vjMain"),
+      vjSide = document.getElementById("vjSide");
+CONFIG.vj.forEach((src,k)=>{
+  const b = document.createElement("button");
+  b.appendChild(mk(src,"foto "+(k+1)));
+  b.onclick = ()=>setVJ(k);
+  vjThumbs.appendChild(b);
+});
+function setVJ(k){
+  vi = k;
+  [...vjThumbs.children].forEach((b,i)=>b.classList.toggle("on",i===k));
+  [vjMain,vjSide].forEach(el=>el.classList.add("swap"));
+  setTimeout(()=>{
+    const n = CONFIG.vj.length;
+    vjMain.replaceChildren(mk(CONFIG.vj[k],"foto utama VJ","zoom cover"));
+    vjSide.replaceChildren(mk(CONFIG.vj[(k+1)%n],"foto samping","zoom cover"));
+    [vjMain,vjSide].forEach(el=>el.classList.remove("swap"));
+  },250);
+}
+setVJ(0);
+
+/* ---------- foto statis ---------- */
+document.querySelectorAll(".photo[data-src]").forEach(fill);
+
+/* ============================================================
+   SLIDER CONTENT CREATOR (panah, klik thumbnail, drag, autoplay)
+   ============================================================ */
+const stage = document.getElementById("stage"),
+      thumbsEl = document.getElementById("thumbs");
+let idx = 0, timer = null, busy = false;
+
+function media(item, play){
+  if (item.video){
+    const v = document.createElement("video");
+    v.src = item.video; v.muted = true; v.loop = true; v.playsInline = true;
+    if (item.thumb) v.poster = item.thumb;
+    if (play) v.autoplay = true;
+    return v;
+  }
+  return mk(item.thumb,"video / thumbnail","cover");
+}
+function makeCard(item){
+  const c = document.createElement("div");
+  c.className = "scard";
+  c.appendChild(media(item,true));
+  if (CONFIG.showViews){
+    const v = document.createElement("div");
+    v.className = "views"; v.innerHTML = "<span>▷</span> " + item.views;
+    c.appendChild(v);
+  }
+  if (item.url){ c.dataset.url = item.url; c.classList.add("link"); c.title = "Klik untuk menonton"; }
+  return c;
+}
+function renderThumbs(){
+  thumbsEl.replaceChildren();
+  CONFIG.videos.forEach((it,i)=>{
+    if (i === idx) return;
+    const b = document.createElement("button");
+    b.className = "thumb";
+    const inn = document.createElement("div"); inn.className = "in";
+    inn.appendChild(media(it,false));
+    if (CONFIG.showViews){
+      const v = document.createElement("span"); v.className = "v"; v.textContent = "▷ " + it.views;
+      inn.appendChild(v);
+    }
+    b.appendChild(inn);
+    b.onclick = ()=>{ go(i, i >= idx ? 1 : -1); restart(); };
+    thumbsEl.appendChild(b);
+  });
+}
+function go(n, dir){
+  const total = CONFIG.videos.length;
+  n = (n + total) % total;
+  if (busy || n === idx) return;
+  busy = true;
+  const old = stage.querySelector(".scard");
+  const card = makeCard(CONFIG.videos[n]);
+  card.style.transform = `translateX(${dir*160}px) rotate(${dir*5}deg) scale(.85)`;
+  card.style.opacity = 0;
+  stage.appendChild(card);
+  card.getBoundingClientRect();           // paksa reflow
+  card.style.transform = ""; card.style.opacity = 1;
+  if (old){
+    old.style.transform = `translateX(${-dir*160}px) rotate(${-dir*5}deg) scale(.85)`;
+    old.style.opacity = 0;
+    setTimeout(()=>old.remove(),560);
+  }
+  idx = n; renderThumbs();
+  setTimeout(()=>busy=false,420);
+}
+function restart(){
+  clearInterval(timer);
+  if (CONFIG.autoplay) timer = setInterval(()=>go(idx+1,1), CONFIG.interval);
+}
+stage.appendChild(makeCard(CONFIG.videos[0]));
+renderThumbs(); restart();
+document.getElementById("prev").onclick = ()=>{ go(idx-1,-1); restart(); };
+document.getElementById("next").onclick = ()=>{ go(idx+1, 1); restart(); };
+document.getElementById("cmid").addEventListener("mouseenter",()=>clearInterval(timer));
+document.getElementById("cmid").addEventListener("mouseleave",restart);
+
+/* drag / swipe pada kartu */
+let sx = null, dragged = false;
+stage.addEventListener("pointerdown",e=>{ sx = e.clientX; dragged = false; });
+stage.addEventListener("click",e=>{
+  if (dragged) return;
+  const c = e.target.closest(".scard.link");
+  if (c) window.open(c.dataset.url, "_blank", "noopener");
+});
+window.addEventListener("pointerup",e=>{
+  if (sx === null) return;
+  const dx = e.clientX - sx; sx = null;
+  dragged = Math.abs(dx) > 10;
+  if (dx < -70){ go(idx+1,1); restart(); }
+  else if (dx > 70){ go(idx-1,-1); restart(); }
+});
+
+/* ============================================================
+   NAVBAR aktif + reveal saat scroll + lightbox
+   ============================================================ */
+const links = [...document.querySelectorAll("#menu a")];
+if ("IntersectionObserver" in window){
+  const nio = new IntersectionObserver(es=>{
+    es.forEach(e=>{
+      if (e.isIntersecting){
+        links.forEach(a=>{
+          const on = a.getAttribute("href") === "#"+e.target.id;
+          a.classList.toggle("active", on);
+          if (on){   // di HP: geser menu agar tombol aktif terlihat
+            const m = document.getElementById("menu");
+            m.scrollTo({left: a.offsetLeft - (m.clientWidth - a.clientWidth)/2, behavior:"smooth"});
+          }
+        });
+      }
+    });
+  },{rootMargin:"-40% 0px -55% 0px"});
+  links.forEach(a=>{ const s = document.querySelector(a.getAttribute("href")); if (s) nio.observe(s); });
+
+  const rio = new IntersectionObserver(es=>{
+    es.forEach(e=>{ if (e.isIntersecting){ e.target.classList.add("in"); rio.unobserve(e.target); } });
+  },{threshold:.05});
+  document.querySelectorAll(".reveal").forEach(el=>rio.observe(el));
+} else {
+  document.querySelectorAll(".reveal").forEach(el=>el.classList.add("in"));
+}
+links[0].classList.add("active");
+
+const lb = document.getElementById("lb");
+document.addEventListener("click",e=>{
+  const p = e.target.closest(".photo.has.zoom");
+  if (p){ lb.querySelector("img").src = p.querySelector("img").src; lb.classList.add("on"); }
+});
+lb.onclick = ()=>lb.classList.remove("on");
+document.addEventListener("keydown",e=>{
+  if (e.key === "Escape") lb.classList.remove("on");
+  if (e.key === "ArrowLeft" && !lb.classList.contains("on")){ go(idx-1,-1); restart(); }
+  if (e.key === "ArrowRight" && !lb.classList.contains("on")){ go(idx+1,1); restart(); }
+});
+</script>
+</body>
+</html>
