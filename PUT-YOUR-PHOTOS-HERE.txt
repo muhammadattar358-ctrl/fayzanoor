@@ -1,3 +1,0 @@
-Taruh foto di folder ini dengan nama file persis seperti di index.html
-(contoh: profile.jpg, hack-up.png, vj-1.jpg, thumb-1.jpg, fashion-show.jpg).
-Foto yang belum ada otomatis tampil sebagai placeholder.
